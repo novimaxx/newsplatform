@@ -1,0 +1,15 @@
+# секреты и сессии — НИКОГДА в git
+.env
+*.session
+*.session-journal
+*.session.bak
+
+# мусор
+__pycache__/
+*.pyc
+.DS_Store
+node_modules/
+
+# большие генерируемые html-списки
+channels.html
+missing_channels.html
