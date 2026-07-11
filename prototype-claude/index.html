@@ -68,6 +68,11 @@ input{font:inherit;color:inherit}
 .feed-wrap{display:grid;grid-template-columns:minmax(430px,1fr) minmax(420px,560px);height:100%}
 .stream{border-right:1px solid var(--line);display:flex;flex-direction:column;min-width:0}
 .stream-head{padding:10px 14px 8px;border-bottom:1px solid var(--line);background:var(--surface)}
+.seg{display:flex;gap:3px;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:3px;margin-bottom:9px;width:max-content}
+.seg button{padding:5px 14px;border-radius:6px;font-size:12.5px;font-weight:650;color:var(--muted)}
+.seg button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.seg button .c{font-family:var(--mono);font-size:10px;opacity:.6;margin-left:5px}
+.row .src-tag{color:var(--accent);font-weight:600}
 .chips-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .tchip{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:4px 10px;border-radius:99px;border:1.4px solid var(--line);color:var(--muted)}
 .tchip:hover{border-color:var(--muted)}
@@ -452,7 +457,7 @@ let CANDS=[
 const EDITIONS=['Крипта 24','Мир за минуту'];
 
 /* ═══════════ СОСТОЯНИЕ ═══════════ */
-const S={view:'feed',selEv:1,topics:new Set(Object.keys(TOPICS)),hideAds:true,imp4:false,q:'',
+const S={view:'feed',feedMode:'events',selEv:1,topics:new Set(Object.keys(TOPICS)),hideAds:true,imp4:false,q:'',
  edTab:0,selCand:1,pickVar:{},candText:{},candMedia:{},candDest:{},
  wizStep:0,wizTopics:new Set(['crypto']),wizDest:null,wizFmt:'card',
  phScreen:'onb1',phTopics:new Set(['war','crypto','world']),phSw:{ads:true,dup:true,imp:false},phFmt:'card',
@@ -479,12 +484,41 @@ function feedList(){return EVENTS.filter(e=>{
   if(![...e.tp].some(t=>S.topics.has(t)))return false;
   if(S.q&&!(e.t+e.x).toLowerCase().includes(S.q.toLowerCase()))return false;
   return true}).sort((a,b)=>b.at-a.at)}
+/* сырой поток: каждое событие разворачивается в отдельные посты источников — как в общем канале */
+function rawList(){const out=[];
+ for(const e of EVENTS){
+  if(S.imp4&&e.imp<4)continue;
+  if(![...e.tp].some(t=>S.topics.has(t)))continue;
+  if(S.q&&!(e.t+e.x).toLowerCase().includes(S.q.toLowerCase()))continue;
+  if(S.hideAds&&e.ad)continue;
+  for(const s of e.src)out.push({ev:e,src:s})}
+ return out.sort((a,b)=>b.src.t-a.src.t).slice(0,120)}
+function rawRow(p){const e=p.ev;return`
+ <div class="row ${e.id===S.selEv?'sel':''} ${e.ad?'is-ad':''}" data-id="${e.id}">
+  <div class="row-top">${e.tp.map(chip).join('')}${e.ad?'<span class="chip" style="color:var(--muted);background:var(--surface2)">РЕКЛАМА</span>':''}${impBars(e.imp)}</div>
+  <h3>${esc(e.t)}</h3>
+  <div class="row-meta num"><span class="src-tag">${esc(p.src.ch)}</span>${p.src.u?`<span>@${p.src.u}</span>`:''}${mediaMeta(e.media)}<span class="m-time">${ago(p.src.t)}</span></div>
+ </div>`}
+function eventRow(e){return`
+ <div class="row ${e.id===S.selEv?'sel':''} ${e.ad?'is-ad':''} ${e.fresh?'fresh':''}" data-id="${e.id}">
+  <div class="row-top">${e.tp.map(chip).join('')}${e.ad?'<span class="chip" style="color:var(--muted);background:var(--surface2)">РЕКЛАМА</span>':''}${impBars(e.imp)}</div>
+  <h3>${esc(e.t)}</h3>
+  <div class="row-meta num">${e.src.length>1?`<span class="m-merge">⧉ ${e.src.length}</span>`:''}${mediaMeta(e.media)}<span class="m-time">${ago(e.at)}</span></div>
+ </div>`}
+function rowsHTML(){
+ if(S.feedMode==='raw'){const list=rawList();return list.map(rawRow).join('')||'<div class="detail-empty" style="height:200px">Пусто — ослабь фильтры</div>'}
+ const list=feedList();return list.map(eventRow).join('')||'<div class="detail-empty" style="height:200px">Ничего не найдено — ослабь фильтры</div>'}
 function renderFeed(){
  const list=feedList();
  if(!list.find(e=>e.id===S.selEv))S.selEv=list[0]?.id;
+ const evCount=feedList().length, rawCount=EVENTS.reduce((a,e)=>a+e.src.length,0);
  $('#view').innerHTML=`<div class="feed-wrap">
   <div class="stream">
    <div class="stream-head">
+    <div class="seg">
+     <button class="${S.feedMode==='events'?'on':''}" data-fm="events">Моя лента<span class="c num">${evCount}</span></button>
+     <button class="${S.feedMode==='raw'?'on':''}" data-fm="raw">Общий поток<span class="c num">${rawCount}</span></button>
+    </div>
     <div class="chips-row">${Object.keys(TOPICS).map(k=>{const c=TOPICS[k],on=S.topics.has(k),dark=document.documentElement.dataset.theme==='dark';
       return`<button class="tchip ${on?'on':''}" data-t="${k}" style="${on?`color:${dark?c[1]:c[3]};background:${dark?c[2]:c[4]}`:''}">${c[0]}<span class="c num">${EVENTS.filter(e=>e.tp.includes(k)).length*37+k.length*13}</span></button>`}).join('')}</div>
     <div class="stream-tools">
@@ -493,29 +527,23 @@ function renderFeed(){
      <span class="mini-sw ${S.imp4?'on':''}" id="swImp"><span class="sw"></span>важное 4+</span>
     </div>
    </div>
-   <div id="rows">${list.map(e=>`
-    <div class="row ${e.id===S.selEv?'sel':''} ${e.ad?'is-ad':''} ${e.fresh?'fresh':''}" data-id="${e.id}">
-     <div class="row-top">${e.tp.map(chip).join('')}${e.ad?'<span class="chip" style="color:var(--muted);background:var(--surface2)">РЕКЛАМА</span>':''}${impBars(e.imp)}</div>
-     <h3>${esc(e.t)}</h3>
-     <div class="row-meta num">${e.src.length>1?`<span class="m-merge">⧉ ${e.src.length}</span>`:''}${mediaMeta(e.media)}<span class="m-time">${ago(e.at)}</span></div>
-    </div>`).join('')||'<div class="detail-empty" style="height:200px">Ничего не найдено — ослабь фильтры</div>'}
-   </div>
+   <div id="rows">${rowsHTML()}</div>
   </div>
   <div class="detail" id="detail">${renderDetail()}</div>
  </div>`;
  EVENTS.forEach(e=>e.fresh=false);
+ document.querySelectorAll('[data-fm]').forEach(b=>b.onclick=()=>{
+  S.feedMode=b.dataset.fm;
+  S.hideAds=S.feedMode==='events'; // общий поток = всё подряд, включая рекламу
+  renderFeed();
+  toast(S.feedMode==='raw'?'Общий поток: все посты подряд, как в общем канале':'Моя лента: события, чисто')});
  document.querySelectorAll('.tchip').forEach(b=>b.onclick=()=>{const k=b.dataset.t;S.topics.has(k)?S.topics.delete(k):S.topics.add(k);renderFeed()});
  $('#q').oninput=e=>{S.q=e.target.value;renderRowsOnly()};
  $('#swAds').onclick=()=>{S.hideAds=!S.hideAds;renderFeed()};
  $('#swImp').onclick=()=>{S.imp4=!S.imp4;renderFeed()};
  bindRows();
 }
-function renderRowsOnly(){const list=feedList();$('#rows').innerHTML=list.map(e=>`
-    <div class="row ${e.id===S.selEv?'sel':''} ${e.ad?'is-ad':''}" data-id="${e.id}">
-     <div class="row-top">${e.tp.map(chip).join('')}${e.ad?'<span class="chip" style="color:var(--muted);background:var(--surface2)">РЕКЛАМА</span>':''}${impBars(e.imp)}</div>
-     <h3>${esc(e.t)}</h3>
-     <div class="row-meta num">${e.src.length>1?`<span class="m-merge">⧉ ${e.src.length}</span>`:''}${mediaMeta(e.media)}<span class="m-time">${ago(e.at)}</span></div>
-    </div>`).join('')||'<div class="detail-empty" style="height:200px">Ничего не найдено</div>';bindRows()}
+function renderRowsOnly(){$('#rows').innerHTML=rowsHTML();bindRows()}
 function bindRows(){document.querySelectorAll('.row').forEach(r=>r.onclick=()=>{S.selEv=+r.dataset.id;document.querySelectorAll('.row').forEach(x=>x.classList.toggle('sel',+x.dataset.id===S.selEv));$('#detail').innerHTML=renderDetail();bindDetail();$('.feed-wrap')?.classList.add('showdet')})}
 function renderDetail(){
  const e=EVENTS.find(x=>x.id===S.selEv);
