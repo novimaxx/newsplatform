@@ -1,0 +1,48 @@
+/* ═══════════════════════════════════════════════════════════════
+   WIRE · AURORA — утверждённая палитра (индиго + циан)
+   Drop-in токены. Подключить и переопределить :root / [data-theme].
+   Имена переменных совместимы с прототипом и V2.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root{
+  /* AURORA · СВЕТЛАЯ «прохладный фарфор» */
+  --bg:#EEF0FB; --surface:#FFFFFF; --surface2:#F0F2FC; --ink:#151735; --muted:#5A5F80; --faint:#9498B8;
+  --line:#E4E5F2; --hair:rgba(20,22,51,.06);
+  --accent:#5B4FE0;         /* индиго — главный акцент */
+  --accent2:#0CA5C4;        /* циан — вторичный, для градиентов */
+  --accent-soft:#ECEBFC; --accent-line:#CFCDF5; --accent-ink:#FFFFFF;
+  --good:#0E9E6E; --good-soft:#E2F3EC; --warn:#B7791F; --bad:#D64545; --bad-soft:#F7E6E6;
+  --info:#0CA5C4; --info-soft:#E3F5F9; --tg:#2AABEE;
+  --sel:#F1EFFC;
+  --mesh1:rgba(91,79,224,.06); --mesh2:rgba(12,165,196,.05);
+  --glow:0 0 24px rgba(91,79,224,.18);
+  --shadow:0 1px 2px rgba(20,22,51,.05),0 8px 26px rgba(20,22,51,.08);
+}
+[data-theme="dark"]{
+  /* AURORA · ТЁМНАЯ «сине-чёрный космос» */
+  --bg:#080B14; --surface:#111524; --surface2:#191E30; --ink:#EAECF6; --muted:#8D92AD; --faint:#5A5F7C;
+  --line:#232840; --hair:rgba(234,236,246,.06);
+  --accent:#8B8CF2;         /* индиго-фиолет — главный акцент */
+  --accent2:#67E8F0;        /* циан — вторичный */
+  --accent-soft:#1B1B3A; --accent-line:#34345E; --accent-ink:#0A0B1A;
+  --good:#4ADE9E; --good-soft:#0E2A22; --warn:#F2C14E; --bad:#F87171; --bad-soft:#2C1A1A;
+  --info:#67E8F0; --info-soft:#0E2A33; --tg:#2AABEE;
+  --sel:#191B33;
+  --mesh1:rgba(139,140,242,.11); --mesh2:rgba(103,232,240,.10);
+  --glow:0 0 26px rgba(139,140,242,.32);
+  --shadow:0 1px 0 rgba(255,255,255,.04) inset,0 8px 26px rgba(0,0,0,.42);
+}
+
+/* Флагманские приёмы (по желанию):
+   1) mesh-фон:
+      body{background-image:
+        radial-gradient(720px 380px at 6% -8%,var(--mesh1),transparent 60%),
+        radial-gradient(640px 420px at 100% 0%,var(--mesh2),transparent 58%);
+        background-repeat:no-repeat}
+   2) главная кнопка — градиент акцентов + свечение:
+      .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));
+        color:var(--accent-ink);border:none;box-shadow:var(--glow)}
+   3) выбранный элемент / бренд-пульс — свечение var(--glow), градиент accent→accent2.
+   Правила: акцент — индиго (главный), циан — вторичный/градиент.
+   --info = циан (ссылки/@username). Семантика good/bad ≠ акцент. TG-синий только в TG-контекстах.
+*/
