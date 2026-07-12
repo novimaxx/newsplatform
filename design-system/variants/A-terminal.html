@@ -1,0 +1,88 @@
+<!-- @dsCard group="Варианты ленты" -->
+<meta charset="UTF-8">
+<style>
+/* ВАРИАНТ A · «ТЕРМИНАЛ» — плотный профи-инструмент, master-detail, для тех кто живёт в потоке */
+:root{--bg:#090C11;--surface:#10151D;--surface2:#171D27;--glass:rgba(13,17,24,.66);--ink:#EBEEF4;--muted:#8E99A8;--faint:#5C6673;--line:rgba(235,238,244,.08);--accent:#F5AE3D;--accent-soft:#2A2010;--good:#4FC08F;--good-soft:#12281E;--bad:#E36B6B;--info:#5BAEF0;--sel:#1C2330;--tg:#2AABEE;--mono:ui-monospace,"SF Mono",Menlo,monospace;--ui:"Helvetica Neue",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--glow:0 0 24px rgba(245,174,61,.2)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.5 var(--ui);-webkit-font-smoothing:antialiased;background-image:radial-gradient(700px 340px at 10% -6%,rgba(245,174,61,.05),transparent 60%)}
+.vlabel{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:700;padding:12px 16px 0}
+.vlabel b{color:var(--ink);font-weight:750;font-size:13px;display:block;margin-top:2px;letter-spacing:0;text-transform:none}
+.app{display:grid;grid-template-columns:180px 1fr 1.05fr;height:560px;margin:12px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+/* сайдбар */
+.side{border-right:1px solid var(--line);padding:14px 10px;display:flex;flex-direction:column;gap:3px;background:var(--bg)}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:14px;letter-spacing:.06em;padding:2px 8px 12px}
+.logo .p{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:var(--glow)}
+.nav{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;color:var(--muted);font-weight:600;font-size:12.5px}
+.nav.on{background:var(--accent-soft);color:var(--accent)}
+.nav .c{margin-left:auto;font-family:var(--mono);font-size:10px;opacity:.6}
+.side .spacer{flex:1}
+.plan{border:1px solid var(--line);border-radius:10px;padding:10px;font-size:11px;color:var(--muted)}
+.plan b{color:var(--ink);font-size:12px}
+/* поток */
+.stream{border-right:1px solid var(--line);display:flex;flex-direction:column;min-width:0}
+.sh{padding:9px 13px;border-bottom:1px solid var(--line);background:var(--glass);backdrop-filter:blur(10px)}
+.seg{display:inline-flex;gap:2px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:2px}
+.seg span{padding:4px 11px;border-radius:6px;font-size:11.5px;font-weight:650;color:var(--muted)}
+.seg span.on{background:var(--surface2);color:var(--ink)}
+.seg .c{font-family:var(--mono);font-size:9px;opacity:.6;margin-left:4px}
+.rows{overflow-y:auto;flex:1}
+.row{padding:10px 13px;border-bottom:1px solid var(--line);position:relative}
+.row.sel{background:var(--sel)}.row.sel::before{content:"";position:absolute;left:0;top:9px;bottom:9px;width:3px;border-radius:3px;background:var(--accent);box-shadow:var(--glow)}
+.rt{display:flex;align-items:center;gap:5px;margin-bottom:3px}
+.chip{font-family:var(--mono);font-size:8px;letter-spacing:.07em;text-transform:uppercase;font-weight:750;padding:2px 6px;border-radius:5px}
+.imp{margin-left:auto;display:flex;gap:2px}.imp i{width:3px;height:10px;border-radius:1px;background:var(--line)}.imp i.on{background:var(--accent)}
+.row h3{margin:0 0 3px;font-size:12.5px;font-weight:600;line-height:1.32}
+.rm{display:flex;gap:9px;font-family:var(--mono);font-size:9.5px;color:var(--faint)}.rm .mg{color:var(--info)}.rm .t{margin-left:auto}
+.thumb{float:right;width:44px;height:32px;border-radius:6px;margin-left:8px;background:linear-gradient(135deg,#2A3A52,#3A2E1D)}
+/* деталь */
+.det{overflow-y:auto;padding:16px 18px;background:var(--surface)}
+.det h2{margin:8px 0 10px;font-size:16px;line-height:1.3;font-weight:750;letter-spacing:-.01em}
+.ctx{display:inline-flex;font-family:var(--mono);font-size:10px;color:var(--good);background:var(--good-soft);border-radius:7px;padding:4px 10px;margin-bottom:12px}
+.mg4{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:12px}
+.mm{aspect-ratio:16/11;border-radius:8px;border:1px solid var(--line)}
+.mm:nth-child(1){background:linear-gradient(135deg,#2A3A52,#1B2735)}.mm:nth-child(2){background:linear-gradient(160deg,#33262E,#22364A)}.mm:nth-child(3){background:linear-gradient(115deg,#1F3040,#1A222E)}.mm:nth-child(4){background:linear-gradient(150deg,#37302E,#1B2430);position:relative}
+.mm .more{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,13,18,.5);color:#fff;font-weight:750;font-size:12px}
+.srcb{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:14px}
+.srch{padding:7px 12px;background:var(--surface2);font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:750}
+.srch .n{color:var(--info)}
+.sl{display:flex;align-items:center;gap:9px;padding:6px 12px;border-top:1px solid var(--line);font-size:12px}
+.sl .u{color:var(--info);font-family:var(--mono);font-size:10px}
+.first{font-family:var(--mono);font-size:8.5px;color:var(--good);border:1px solid var(--good);border-radius:99px;padding:1px 6px;letter-spacing:.06em}
+.sl .dt{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--faint)}
+.acts{display:flex;gap:8px}
+.btn{border:1px solid var(--line);border-radius:9px;padding:8px 14px;font-size:12.5px;font-weight:650;color:var(--ink);background:var(--surface)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#171006}
+</style>
+<div class="vlabel">Вариант A<b>«Терминал» — плотный, master-detail, максимум информации на экран</b></div>
+<div class="app">
+  <aside class="side">
+    <div class="logo"><span class="p"></span>WIRE</div>
+    <div class="nav on">Лента <span class="c">128</span></div>
+    <div class="nav">Маршруты <span class="c">3</span></div>
+    <div class="nav">Источники <span class="c">1024</span></div>
+    <div class="nav">Редакция <span class="c">4</span></div>
+    <div class="nav">Пульт</div>
+    <div class="spacer"></div>
+    <div class="plan"><b>PRO · 18 дней</b><br>3 маршрута из 10</div>
+  </aside>
+  <section class="stream">
+    <div class="sh"><div class="seg"><span class="on">Моя лента<span class="c">15</span></span><span>Общий<span class="c">74</span></span></div></div>
+    <div class="rows">
+      <div class="row sel"><span class="thumb"></span><div class="rt"><span class="chip" style="color:#EFC152;background:#2A2410">Крипта</span><span class="chip" style="color:#63C795;background:#152B22">Финансы</span><span class="imp"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div><h3>Binance объявила листинг нового токена — +34% за 10 минут</h3><div class="rm"><span class="mg">⧉ 14</span><span>▦ 4</span><span class="t">43 сек</span></div></div>
+      <div class="row"><div class="rt"><span class="chip" style="color:#E08B8B;background:#2E2020">Война</span><span class="imp"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div><h3>Воздушная тревога в трёх областях: пуски БПЛА</h3><div class="rm"><span class="mg">⧉ 9</span><span>▶</span><span class="t">2 мин</span></div></div>
+      <div class="row"><div class="rt"><span class="chip" style="color:#6FBBE8;background:#15242E">Мировые</span><span class="imp"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div><h3>Reuters: ЕС согласовал новый пакет ограничений</h3><div class="rm"><span class="mg">⧉ 5</span><span class="t">6 мин</span></div></div>
+      <div class="row"><div class="rt"><span class="chip" style="color:#63C795;background:#152B22">Финансы</span><span class="imp"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div><h3>НБУ снизил ставку до 12,5% — впервые за 8 месяцев</h3><div class="rm"><span class="mg">⧉ 4</span><span class="t">9 мин</span></div></div>
+      <div class="row"><div class="rt"><span class="chip" style="color:#6FD0DC;background:#12282B">Технологии</span><span class="imp"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div><h3>OpenAI показала новую модель для агентов</h3><div class="rm"><span class="mg">⧉ 3</span><span class="t">13 мин</span></div></div>
+    </div>
+  </section>
+  <section class="det">
+    <div class="rt"><span class="chip" style="color:#EFC152;background:#2A2410">Крипта</span><span class="chip" style="color:#63C795;background:#152B22">Финансы</span><span class="imp"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+    <h2>Binance объявила листинг нового токена — цена выросла на 34% за 10 минут</h2>
+    <div class="ctx">◈ BTC 118 402 ▲1.2%</div>
+    <div class="mg4"><div class="mm"></div><div class="mm"></div><div class="mm"></div><div class="mm"><div class="more">+2</div></div></div>
+    <div class="srcb"><div class="srch">⧉ <span class="n">14</span> источников · хронология</div>
+      <div class="sl">Binance Announcements <span class="u">@binance_announcements</span><span class="first">ПЕРВЫЙ</span><span class="dt">43 сек</span></div>
+      <div class="sl">Раньше всех <span class="u">@bbbreaking</span><span class="dt">+14 мин</span></div>
+    </div>
+    <div class="acts"><button class="btn pri">✎ Редактировать</button><button class="btn">→ В маршрут</button></div>
+  </section>
+</div>
