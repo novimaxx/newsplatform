@@ -1,0 +1,239 @@
+<!-- @dsCard group="Флагман" -->
+<meta charset="UTF-8">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   WIRE FLAGSHIP · 3 цветовых мира × 2 темы · спроектировано с нуля
+   AURORA (индиго+циан) · PRESS (чернила+вермилион) · EMERALD (изумруд+золото)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── AURORA · dark ── */
+:root,[data-world="aurora"][data-mode="dark"]{
+  --bg:#080912;--bg2:#0C0E1C;--surface:#12142195;--surface-s:#141726;--surface2:#1B1F32;
+  --ink:#EAECF6;--muted:#8D92AD;--faint:#5A5F7C;--line:rgba(234,236,246,.09);--hair:rgba(234,236,246,.055);
+  --acc:#67E8F0;--acc2:#A78BFA;--acc-ink:#04121A;--acc-soft:#0E2A33;
+  --good:#4ADE9E;--good-soft:#0E2A22;--bad:#F87171;--info:#7DB4FF;
+  --mesh1:rgba(103,232,240,.10);--mesh2:rgba(167,139,250,.12);
+  --glow:0 0 32px rgba(103,232,240,.28);--sh:0 1px 0 rgba(255,255,255,.04) inset,0 20px 50px -22px rgba(0,0,0,.7);
+}
+[data-world="aurora"][data-mode="light"]{
+  --bg:#EEF0FB;--bg2:#F5F6FD;--surface:#FFFFFFcc;--surface-s:#FFFFFF;--surface2:#F0F2FC;
+  --ink:#141633;--muted:#5A5F80;--faint:#9498B8;--line:rgba(20,22,51,.10);--hair:rgba(20,22,51,.06);
+  --acc:#5B4FE0;--acc2:#0CA5C4;--acc-ink:#FFFFFF;--acc-soft:#ECEBFC;
+  --good:#0E9E6E;--good-soft:#E2F3EC;--bad:#D64545;--info:#2E6FE0;
+  --mesh1:rgba(91,79,224,.07);--mesh2:rgba(12,165,196,.06);
+  --glow:0 0 28px rgba(91,79,224,.18);--sh:0 1px 2px rgba(20,22,51,.05),0 22px 48px -24px rgba(20,22,51,.28);
+}
+/* ── PRESS · dark ── */
+[data-world="press"][data-mode="dark"]{
+  --bg:#0B0B0C;--bg2:#0E0E0F;--surface:#151516ea;--surface-s:#171718;--surface2:#1E1E20;
+  --ink:#F3F1EC;--muted:#918F89;--faint:#605E59;--line:rgba(243,241,236,.11);--hair:rgba(243,241,236,.07);
+  --acc:#FF5A36;--acc2:#F3F1EC;--acc-ink:#160603;--acc-soft:#2A130C;
+  --good:#7BC96F;--good-soft:#16240F;--bad:#FF5A36;--info:#8FB8D8;
+  --mesh1:rgba(255,90,54,.06);--mesh2:rgba(255,90,54,.03);
+  --glow:0 0 30px rgba(255,90,54,.22);--sh:0 1px 0 rgba(255,255,255,.03) inset,0 18px 46px -22px rgba(0,0,0,.72);
+}
+[data-world="press"][data-mode="light"]{
+  --bg:#FAFAF7;--bg2:#FFFFFF;--surface:#FFFFFFdd;--surface-s:#FFFFFF;--surface2:#F3F2ED;
+  --ink:#121211;--muted:#6C6A64;--faint:#A3A199;--line:rgba(18,18,17,.12);--hair:rgba(18,18,17,.07);
+  --acc:#E5380D;--acc2:#121211;--acc-ink:#FFFFFF;--acc-soft:#FCE6DF;
+  --good:#3E8E2E;--good-soft:#E3F0DE;--bad:#E5380D;--info:#2C6796;
+  --mesh1:rgba(229,56,13,.04);--mesh2:rgba(229,56,13,.02);
+  --glow:0 0 24px rgba(229,56,13,.14);--sh:0 1px 2px rgba(18,18,17,.06),0 20px 44px -24px rgba(18,18,17,.24);
+}
+/* ── EMERALD · dark ── */
+[data-world="emerald"][data-mode="dark"]{
+  --bg:#07110C;--bg2:#0A1610;--surface:#0F1B14ea;--surface-s:#111E17;--surface2:#16261C;
+  --ink:#E7F0EA;--muted:#82988B;--faint:#54685C;--line:rgba(231,240,234,.09);--hair:rgba(231,240,234,.055);
+  --acc:#F2C14E;--acc2:#34D399;--acc-ink:#1A1405;--acc-soft:#2A2410;
+  --good:#34D399;--good-soft:#0E2A1F;--bad:#F0876C;--info:#6FC9C0;
+  --mesh1:rgba(242,193,78,.08);--mesh2:rgba(52,211,153,.10);
+  --glow:0 0 30px rgba(242,193,78,.22);--sh:0 1px 0 rgba(255,255,255,.04) inset,0 20px 48px -22px rgba(0,0,0,.7);
+}
+[data-world="emerald"][data-mode="light"]{
+  --bg:#F1F6F1;--bg2:#F8FBF8;--surface:#FFFFFFdd;--surface-s:#FFFFFF;--surface2:#EBF2EC;
+  --ink:#0E1A13;--muted:#54615A;--faint:#8FA096;--line:rgba(14,26,19,.10);--hair:rgba(14,26,19,.06);
+  --acc:#B07D0A;--acc2:#0E9D6B;--acc-ink:#FFFFFF;--acc-soft:#F5EDD6;
+  --good:#0E9D6B;--good-soft:#E0F1E9;--bad:#CB5A3C;--info:#2A8C84;
+  --mesh1:rgba(176,125,10,.06);--mesh2:rgba(14,157,107,.06);
+  --glow:0 0 26px rgba(176,125,10,.16);--sh:0 1px 2px rgba(14,26,19,.05),0 22px 46px -24px rgba(14,26,19,.24);
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:13.5px/1.55 "Helvetica Neue",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(760px 420px at 8% -10%,var(--mesh1),transparent 60%),radial-gradient(680px 460px at 100% 0%,var(--mesh2),transparent 58%);
+  background-repeat:no-repeat;transition:background-color .3s,color .3s}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+
+/* панель управления витриной */
+.ctrl{display:flex;align-items:center;gap:10px;padding:14px 18px;flex-wrap:wrap}
+.ctrl .grp{display:inline-flex;gap:3px;background:var(--surface2);border:1px solid var(--hair);border-radius:99px;padding:3px}
+.ctrl .grp button{border:none;background:none;color:var(--muted);font:650 12px/1 inherit;padding:7px 15px;border-radius:99px;cursor:pointer;transition:.15s}
+.ctrl .grp button.on{background:var(--surface-s);color:var(--ink);box-shadow:var(--sh)}
+.ctrl .lab{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:700}
+.ctrl .name{margin-left:auto;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--acc);font-weight:700;letter-spacing:.04em}
+
+/* каркас экрана */
+.screen{margin:6px 14px 16px;border:1px solid var(--hair);border-radius:20px;overflow:hidden;box-shadow:var(--sh);background:var(--bg2)}
+.grid{display:grid;grid-template-columns:74px 1fr 300px;height:600px}
+@media(max-width:900px){.grid{grid-template-columns:60px 1fr}.trend{display:none}}
+
+/* рельс */
+.rail{border-right:1px solid var(--hair);display:flex;flex-direction:column;align-items:center;padding:16px 0;gap:6px;background:var(--surface)}
+.mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:flex;align-items:center;justify-content:center;color:var(--acc-ink);font-weight:900;font-size:16px;box-shadow:var(--glow);margin-bottom:10px}
+.ri{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:17px;position:relative;cursor:pointer;transition:.15s}
+.ri:hover{color:var(--ink);background:var(--surface2)}
+.ri.on{color:var(--acc);background:var(--acc-soft)}
+.ri.on::before{content:"";position:absolute;left:-16px;top:11px;bottom:11px;width:3px;border-radius:3px;background:var(--acc);box-shadow:var(--glow)}
+.rail .sp{flex:1}
+.ava{width:34px;height:34px;border-radius:50%;background:conic-gradient(from 210deg,var(--acc),var(--acc2),var(--acc));display:flex;align-items:center;justify-content:center;color:var(--acc-ink);font-weight:800;font-size:13px}
+
+/* центр */
+.main{display:flex;flex-direction:column;min-width:0}
+.bar{display:flex;align-items:center;gap:14px;padding:13px 20px;background:var(--surface);backdrop-filter:blur(16px) saturate(1.5);border-bottom:1px solid var(--hair)}
+.brand{font-weight:800;font-size:15px;letter-spacing:.02em}
+.brand .d{color:var(--acc)}
+.seg{display:inline-flex;gap:2px;background:var(--surface2);border:1px solid var(--hair);border-radius:10px;padding:2px}
+.seg span{padding:6px 13px;border-radius:8px;font-size:12px;font-weight:650;color:var(--muted);cursor:pointer}
+.seg span.on{background:var(--surface-s);color:var(--ink);box-shadow:var(--sh)}
+.seg .c{font-family:ui-monospace,Menlo,monospace;font-size:9px;opacity:.6;margin-left:4px}
+.bar .live{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.1em;color:var(--good);font-weight:700;border:1px solid var(--hair);border-radius:99px;padding:5px 12px}
+.ld{width:6px;height:6px;border-radius:50%;background:var(--good);box-shadow:0 0 10px var(--good);animation:bl 1.7s infinite}
+@keyframes bl{50%{opacity:.3}}
+@media(prefers-reduced-motion:reduce){.ld,.mark{animation:none}}
+
+.flow{flex:1;overflow-y:auto;padding:16px 20px}
+/* герой */
+.hero{position:relative;border:1px solid var(--hair);border-radius:18px;overflow:hidden;margin-bottom:14px;background:var(--surface-s);box-shadow:var(--sh)}
+.hero .cover{height:180px;position:relative;background:
+  radial-gradient(120% 120% at 80% 0%,var(--mesh2),transparent 55%),
+  linear-gradient(135deg,color-mix(in srgb,var(--acc) 22%,#0b0d18),color-mix(in srgb,var(--acc2) 20%,#0b0d18))}
+.hero .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--surface-s),transparent 62%)}
+.hero .cover .tag{position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:2}
+.hero .cover .n{position:absolute;top:14px;right:14px;z-index:2;font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:#fff;background:rgba(6,10,16,.55);backdrop-filter:blur(8px);border-radius:99px;padding:5px 12px}
+.hero .in{padding:0 20px 18px;margin-top:-42px;position:relative;z-index:2}
+.hero h1{margin:0 0 9px;font-size:23px;line-height:1.2;font-weight:800;letter-spacing:-.02em;text-wrap:balance}
+.hero p{margin:0 0 13px;font-size:13.5px;color:var(--muted);line-height:1.6;max-width:92%}
+.hero .foot{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.pricepill{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--good);background:var(--good-soft);border-radius:8px;padding:5px 11px;font-variant-numeric:tabular-nums}
+.hero .btn{margin-left:auto}
+.chip{font-family:ui-monospace,Menlo,monospace;font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;padding:3px 9px;border-radius:7px}
+.c-w{color:#fff;background:rgba(248,113,113,.28)}.c-c{color:var(--acc-ink);background:var(--acc)}.c-f{color:#fff;background:rgba(74,222,158,.28)}.c-wo{color:#fff;background:rgba(125,180,255,.3)}
+.imp{display:inline-flex;gap:2.5px;vertical-align:middle}
+.imp i{width:4px;height:12px;border-radius:2px;background:var(--line)}.imp i.on{background:var(--acc)}
+.btn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--hair);border-radius:11px;padding:9px 16px;font-size:13px;font-weight:700;color:var(--ink);background:var(--surface2);cursor:pointer;transition:transform .12s}
+.btn:hover{transform:translateY(-1px)}
+.btn.pri{background:linear-gradient(135deg,var(--acc),var(--acc2));border-color:transparent;color:var(--acc-ink);box-shadow:var(--glow)}
+
+/* строки */
+.row{display:flex;gap:12px;padding:12px 6px;border-bottom:1px solid var(--hair);cursor:pointer;border-radius:12px;transition:background .12s}
+.row:hover{background:var(--surface)}
+.row .th{width:70px;height:52px;border-radius:11px;flex:none;border:1px solid var(--hair);background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 30%,#12141f),color-mix(in srgb,var(--acc2) 26%,#12141f))}
+.row .b{min-width:0;flex:1}
+.row .t{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.row h3{margin:0 0 5px;font-size:13.5px;font-weight:650;line-height:1.32;letter-spacing:-.005em}
+.row .m{display:flex;gap:11px;font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--faint)}
+.row .m .mg{color:var(--info);font-weight:600}.row .m .tm{margin-left:auto}
+
+/* тренды */
+.trend{border-left:1px solid var(--hair);padding:16px 16px;overflow-y:auto;background:var(--surface)}
+.trend .h{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:750;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.trend .h .dot{width:6px;height:6px;border-radius:50%;background:var(--acc);box-shadow:var(--glow)}
+.tr{padding:11px 0;border-bottom:1px solid var(--hair)}
+.tr .tt{font-size:13px;font-weight:650;margin-bottom:3px}
+.tr .ts{font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--faint)}
+.tr .ts b{color:var(--acc)}
+.kpi{margin-top:16px;border:1px solid var(--hair);border-radius:14px;padding:14px;background:var(--surface-s)}
+.kpi .kt{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:750}
+.kpi .kv{font-size:25px;font-weight:850;letter-spacing:-.03em;margin-top:4px;font-variant-numeric:tabular-nums}
+.spark{margin-top:11px;display:flex;align-items:flex-end;gap:3px;height:30px}
+.spark i{flex:1;border-radius:3px 3px 0 0;background:color-mix(in srgb,var(--acc) 32%,transparent)}
+.spark i.hi{background:var(--acc);box-shadow:var(--glow)}
+</style>
+
+<div class="ctrl">
+  <span class="lab">Мир</span>
+  <div class="grp" id="worlds">
+    <button data-w="aurora" class="on">Aurora</button>
+    <button data-w="press">Press</button>
+    <button data-w="emerald">Emerald</button>
+  </div>
+  <span class="lab" style="margin-left:8px">Тема</span>
+  <div class="grp" id="modes">
+    <button data-m="dark" class="on">◐ Тёмная</button>
+    <button data-m="light">☀ Светлая</button>
+  </div>
+  <span class="name" id="wname">AURORA · индиго + циан</span>
+</div>
+
+<div class="screen">
+  <div class="grid">
+    <nav class="rail">
+      <div class="mark">W</div>
+      <div class="ri on">◎</div><div class="ri">⇄</div><div class="ri">▤</div><div class="ri">✎</div><div class="ri">◨</div>
+      <div class="sp"></div>
+      <div class="ava">MN</div>
+    </nav>
+    <section class="main">
+      <div class="bar">
+        <div class="brand">WIRE<span class="d">.</span></div>
+        <div class="seg"><span class="on">Моя лента<span class="c">15</span></span><span>Общий поток<span class="c">74</span></span></div>
+        <span class="live"><span class="ld"></span>LIVE · 1 024</span>
+      </div>
+      <div class="flow">
+        <article class="hero">
+          <div class="cover">
+            <div class="tag"><span class="chip c-c">Крипта</span><span class="chip c-f">Финансы</span></div>
+            <div class="n">⧉ 14 источников · первым @binance_announcements · 43 сек</div>
+          </div>
+          <div class="in">
+            <div style="margin-bottom:8px"><span class="imp"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+            <h1>Binance объявила листинг нового токена — +34% за 10 минут</h1>
+            <p>Биржа добавит торговые пары в 19:00 по Киеву. Объём фьючерсов вырос втрое, ликвидации на $48М за час.</p>
+            <div class="foot"><span class="pricepill">◈ BTC 118 402 ▲1.2%</span><button class="btn pri">✎ Редактировать</button></div>
+          </div>
+        </article>
+        <div class="row">
+          <div class="th"></div>
+          <div class="b"><div class="t"><span class="chip c-w">Война</span><span class="imp"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+          <h3>Воздушная тревога в трёх областях: зафиксированы пуски БПЛА</h3>
+          <div class="m"><span class="mg">⧉ 9</span><span>▶ видео</span><span class="tm">2 мин</span></div></div>
+        </div>
+        <div class="row">
+          <div class="th"></div>
+          <div class="b"><div class="t"><span class="chip c-wo">Мировые</span><span class="imp"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+          <h3>Reuters: ЕС согласовал новый пакет ограничений — детали к вечеру</h3>
+          <div class="m"><span class="mg">⧉ 5</span><span class="tm">6 мин</span></div></div>
+        </div>
+        <div class="row">
+          <div class="th"></div>
+          <div class="b"><div class="t"><span class="chip c-f">Финансы</span><span class="imp"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+          <h3>НБУ снизил учётную ставку до 12,5% — впервые за 8 месяцев</h3>
+          <div class="m"><span class="mg">⧉ 4</span><span class="tm">9 мин</span></div></div>
+        </div>
+      </div>
+    </section>
+    <aside class="trend">
+      <p class="h"><span class="dot"></span>В тренде сейчас</p>
+      <div class="tr"><div class="tt">Bitcoin ETF</div><div class="ts"><b>84</b> источника · растёт ▲</div></div>
+      <div class="tr"><div class="tt">Воздушная тревога</div><div class="ts"><b>62</b> источника · пик</div></div>
+      <div class="tr"><div class="tt">Пакет ЕС</div><div class="ts"><b>29</b> источников</div></div>
+      <div class="kpi">
+        <div class="kt">Обработано сегодня</div>
+        <div class="kv">12 969</div>
+        <div class="spark"><i style="height:34%"></i><i style="height:52%"></i><i style="height:40%"></i><i style="height:66%"></i><i style="height:54%"></i><i style="height:78%"></i><i style="height:60%"></i><i class="hi" style="height:94%"></i></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+const root=document.documentElement;
+root.dataset.world='aurora';root.dataset.mode='dark';
+const NAMES={aurora:'AURORA · индиго + циан',press:'PRESS · чернила + вермилион',emerald:'EMERALD · изумруд + золото'};
+document.getElementById('worlds').onclick=e=>{const b=e.target.closest('[data-w]');if(!b)return;
+  root.dataset.world=b.dataset.w;document.querySelectorAll('#worlds button').forEach(x=>x.classList.toggle('on',x===b));
+  document.getElementById('wname').textContent=NAMES[b.dataset.w]};
+document.getElementById('modes').onclick=e=>{const b=e.target.closest('[data-m]');if(!b)return;
+  root.dataset.mode=b.dataset.m;document.querySelectorAll('#modes button').forEach(x=>x.classList.toggle('on',x===b))};
+</script>
