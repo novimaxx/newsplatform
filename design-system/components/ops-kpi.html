@@ -1,0 +1,21 @@
+<!-- @dsCard group="Пульт" -->
+<style>:root{--bg:#0B0F15;--surface:#131822;--surface2:#1A2029;--ink:#E7EBF1;--muted:#8D97A5;--line:#222937;--accent:#F0A83E;--accent-soft:#291F10;--accent-line:#4A3A1E;--good:#4CB98A;--good-soft:#132720;--warn:#E0A83E;--bad:#E06666;--bad-soft:#2C1A1A;--info:#5BAEF0;--info-soft:#132436;--sel:#1D2330;--tg:#2AABEE;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--ui:"Helvetica Neue",-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+*{box-sizing:border-box}body{margin:0;padding:24px;background:var(--bg);color:var(--ink);font:14px/1.5 var(--ui);-webkit-font-smoothing:antialiased}
+.lbl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 0 10px}
+.g{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:520px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.kpi .v{font-size:26px;font-weight:750;letter-spacing:-.02em;margin-top:4px;font-variant-numeric:tabular-nums}
+.kpi .d{font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:2px}
+.svc{display:flex;align-items:center;gap:10px;padding:9px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:13px;max-width:520px;margin-top:8px}
+.dot{width:8px;height:8px;border-radius:50%}.dot.g{background:var(--good)}.dot.y{background:var(--warn)}
+.svc .in{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted)}
+</style>
+<p class="lbl">KPI пульта</p>
+<div class="g">
+<div class="kpi"><div class="k">Обработано сегодня</div><div class="v">12 969</div><div class="d">постов из 1 024 источников</div></div>
+<div class="kpi"><div class="k">Расход AI</div><div class="v" style="color:var(--accent)">$2.43</div><div class="d">разметка $1.9 · редактор $0.5</div></div>
+</div>
+<p class="lbl" style="margin-top:14px">Статус сервиса (зелёный/жёлтый/красный)</p>
+<div class="svc"><span class="dot g"></span><b>tagger (AI)</b><span class="in">очередь: 12 · p95 3.8с</span></div>
+<div class="svc"><span class="dot y"></span><b>router / доставка</b><span class="in">FloodWait на 1 аккаунте</span></div>

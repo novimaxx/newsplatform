@@ -1,0 +1,19 @@
+<!-- @dsCard group="Компоненты" -->
+<style>:root{--bg:#0B0F15;--surface:#131822;--surface2:#1A2029;--ink:#E7EBF1;--muted:#8D97A5;--line:#222937;--accent:#F0A83E;--accent-soft:#291F10;--accent-line:#4A3A1E;--good:#4CB98A;--good-soft:#132720;--warn:#E0A83E;--bad:#E06666;--bad-soft:#2C1A1A;--info:#5BAEF0;--info-soft:#132436;--sel:#1D2330;--tg:#2AABEE;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--ui:"Helvetica Neue",-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+*{box-sizing:border-box}body{margin:0;padding:24px;background:var(--bg);color:var(--ink);font:14px/1.5 var(--ui);-webkit-font-smoothing:antialiased}
+.lbl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 0 10px}
+.seg{display:inline-flex;gap:3px;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:3px;margin-bottom:16px}
+.seg button{padding:5px 14px;border-radius:6px;font-size:12.5px;font-weight:650;color:var(--muted);border:none;background:none}
+.seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.35)}
+.seg .c{font-family:var(--mono);font-size:10px;opacity:.6;margin-left:5px}
+.msw{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);margin-right:18px}
+.sw{width:30px;height:17px;border-radius:99px;background:var(--line);position:relative;display:inline-block}
+.sw::after{content:"";position:absolute;width:13px;height:13px;border-radius:50%;background:var(--surface);top:2px;left:2px;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.msw.on .sw{background:var(--accent)}.msw.on .sw::after{left:15px}
+.search{display:flex;align-items:center;gap:7px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 10px;max-width:300px;color:var(--muted);font-size:13px;margin-top:14px}
+</style>
+<p class="lbl">Переключатель лент (сегмент-контрол)</p>
+<div class="seg"><button class="on">Моя лента<span class="c">15</span></button><button>Общий поток<span class="c">74</span></button><button>Готовые посты<span class="c">12</span></button></div>
+<p class="lbl">Свитчи-фильтры</p>
+<div><span class="msw on"><span class="sw"></span>без рекламы</span><span class="msw"><span class="sw"></span>важное 4+</span></div>
+<div class="search">⌕ Поиск по потоку…</div>

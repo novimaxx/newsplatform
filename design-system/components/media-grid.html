@@ -1,0 +1,18 @@
+<!-- @dsCard group="Лента" -->
+<style>:root{--bg:#0B0F15;--surface:#131822;--surface2:#1A2029;--ink:#E7EBF1;--muted:#8D97A5;--line:#222937;--accent:#F0A83E;--accent-soft:#291F10;--accent-line:#4A3A1E;--good:#4CB98A;--good-soft:#132720;--warn:#E0A83E;--bad:#E06666;--bad-soft:#2C1A1A;--info:#5BAEF0;--info-soft:#132436;--sel:#1D2330;--tg:#2AABEE;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--ui:"Helvetica Neue",-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+*{box-sizing:border-box}body{margin:0;padding:24px;background:var(--bg);color:var(--ink);font:14px/1.5 var(--ui);-webkit-font-smoothing:antialiased}
+.lbl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 0 10px}
+.g{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-width:520px;margin-bottom:14px}
+.g.single{grid-template-columns:1fr}
+.m{aspect-ratio:16/10;border-radius:9px;position:relative;overflow:hidden;border:1px solid var(--line)}
+.g.single .m{aspect-ratio:16/8}
+.p1{background:linear-gradient(135deg,#2A3A52,#1B2735 55%,#3A2E1D)}.p2{background:linear-gradient(160deg,#33262E,#1E2836 60%,#22364A)}
+.p3{background:linear-gradient(115deg,#1F3040,#2E2436 55%,#1A222E)}.p4{background:linear-gradient(150deg,#37302E,#243244 50%,#1B2430)}
+.play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:rgba(10,14,20,.7);border:1.5px solid rgba(255,255,255,.8);color:#fff;display:flex;align-items:center;justify-content:center;padding-left:3px}
+.dur{position:absolute;right:8px;bottom:7px;background:rgba(8,12,18,.8);color:#E7EBF1;font-family:var(--mono);font-size:10px;border-radius:5px;padding:2px 7px}
+.more{position:absolute;inset:0;background:rgba(8,12,18,.55);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+</style>
+<p class="lbl">Альбом 4+ (сетка, «+N» на последнем)</p>
+<div class="g"><div class="m p1"></div><div class="m p2"></div><div class="m p3"></div><div class="m p4"><div class="more">+2</div></div></div>
+<p class="lbl">Видео (превью + ▶ + длительность, грузится по клику)</p>
+<div class="g single"><div class="m p3"><div class="play">▶</div><div class="dur">0:37</div></div></div>

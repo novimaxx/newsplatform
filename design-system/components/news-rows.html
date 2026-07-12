@@ -1,0 +1,23 @@
+<!-- @dsCard group="Лента" -->
+<style>:root{--bg:#0B0F15;--surface:#131822;--surface2:#1A2029;--ink:#E7EBF1;--muted:#8D97A5;--line:#222937;--accent:#F0A83E;--accent-soft:#291F10;--accent-line:#4A3A1E;--good:#4CB98A;--good-soft:#132720;--warn:#E0A83E;--bad:#E06666;--bad-soft:#2C1A1A;--info:#5BAEF0;--info-soft:#132436;--sel:#1D2330;--tg:#2AABEE;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--ui:"Helvetica Neue",-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+*{box-sizing:border-box}body{margin:0;padding:24px;background:var(--bg);color:var(--ink);font:14px/1.5 var(--ui);-webkit-font-smoothing:antialiased}
+.lbl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 0 10px}
+.stream{max-width:560px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg)}
+.row{padding:10px 14px;border-bottom:1px solid var(--line);position:relative;background:var(--bg)}
+.row.sel{background:var(--sel)}.row.sel::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.row.fresh{background:var(--accent-soft)}
+.row.ad{opacity:.5}
+.chip{font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;padding:2px 7px;border-radius:5px}
+.imp{float:right;display:inline-flex;gap:2.5px}.imp i{width:4px;height:11px;border-radius:2px;background:var(--line);display:block}.imp i.on{background:var(--accent)}
+h3{margin:3px 0 2px;font-size:13.5px;font-weight:650;line-height:1.35}
+.meta{display:flex;gap:10px;font-size:11px;color:var(--muted);font-family:var(--mono)}
+.meta .mg{color:var(--info)}.meta .src{color:var(--accent);font-weight:600}.meta .t{margin-left:auto}
+</style>
+<p class="lbl">Строки ленты · событие / выбрано / свежее / сырой пост / реклама</p>
+<div class="stream">
+<div class="row"><span class="imp"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="chip" style="color:#EFC152;background:#2A2410">Крипта</span> <span class="chip" style="color:#63C795;background:#152B22">Финансы</span><h3>Binance объявила листинг нового токена — цена выросла на 34%</h3><div class="meta"><span class="mg">⧉ 14</span><span>▦ 4 фото</span><span class="t">43 сек назад</span></div></div>
+<div class="row sel"><span class="imp"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="chip" style="color:#E08B8B;background:#2E2020">Война</span><h3>Воздушная тревога в трёх областях: зафиксированы пуски БПЛА</h3><div class="meta"><span class="mg">⧉ 9</span><span>▶ видео</span><span class="t">2 мин назад</span></div></div>
+<div class="row fresh"><span class="imp"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="chip" style="color:#6FBBE8;background:#15242E">Мировые</span><h3>Reuters: ЕС согласовал новый пакет — детали к вечеру</h3><div class="meta"><span class="mg">⧉ 5</span><span class="t">только что</span></div></div>
+<div class="row"><span class="imp"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="chip" style="color:#6FBBE8;background:#15242E">Мировые</span><h3>Землетрясение 6,1 у побережья Японии</h3><div class="meta"><span class="src">Reuters</span><span>▣ фото</span><span class="t">16 сек назад</span></div></div>
+<div class="row ad"><span class="chip" style="color:#8D97A5;background:#1A2029">РЕКЛАМА</span><h3 style="font-size:12px;color:var(--muted);font-weight:500">«Заработай на сигналах» — отфильтровано AI</h3></div>
+</div>
