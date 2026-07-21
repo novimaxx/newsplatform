@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Смета: MVP новостной системы</title>
+<title>Смета: MVP новостной системы · реальная стоимость</title>
 <style>
   :root{
     --bg:#F4F5F7; --surface:#FFFFFF; --surface2:#EDEFF2; --ink:#181C23; --muted:#5C6570;
@@ -50,24 +50,25 @@
   h2 .idx{color:var(--accent);font-family:ui-monospace,Menlo,monospace;font-size:14px;margin-right:9px;font-weight:600}
   .sub{color:var(--muted);margin:0 0 24px;max-width:620px}
 
-  /* hero price */
-  .hero{background:var(--surface);border:1px solid var(--accent-line);border-radius:18px;padding:30px 30px 26px;box-shadow:var(--shadow);background:linear-gradient(180deg,var(--accent-soft),var(--surface) 44%)}
+  .hero{border:1px solid var(--accent-line);border-radius:18px;padding:30px 30px 26px;box-shadow:var(--shadow);background:linear-gradient(180deg,var(--accent-soft),var(--surface) 44%)}
   .hero .tname{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;font-weight:600}
   .hero .price{font-size:clamp(40px,7vw,60px);font-weight:700;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
   .hero .price small{font-size:17px;font-weight:400;color:var(--muted);letter-spacing:0}
-  .hero .under{font-size:14.5px;color:var(--muted);margin:12px 0 0;max-width:560px;line-height:1.55}
+  .hero .under{font-size:14.5px;color:var(--muted);margin:12px 0 0;max-width:600px;line-height:1.55}
   .hero .under b{color:var(--ink)}
 
-  /* included grid */
-  .inc{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  @media(max-width:680px){.inc{grid-template-columns:1fr}}
-  .item{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:16px 18px;box-shadow:var(--shadow);display:flex;gap:13px;align-items:flex-start}
-  .item .ic{flex:none;width:30px;height:30px;border-radius:8px;background:var(--good-soft);border:1px solid var(--good-line);color:var(--good);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;margin-top:1px}
-  .item h4{margin:0 0 3px;font-size:15px;letter-spacing:-.005em}
-  .item p{margin:0;font-size:13px;color:var(--muted);line-height:1.5}
-  .item .have{display:inline-block;font-family:ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--good);border:1px solid var(--good-line);background:var(--good-soft);border-radius:99px;padding:1px 6px;margin-left:6px;vertical-align:middle;font-weight:600}
+  .tbl{border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  th,td{padding:13px 20px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--surface2)}
+  td.r{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  .mn{font-weight:600}
+  .md{color:var(--muted);font-size:12.5px;margin-top:3px;line-height:1.5}
+  tr.zone td{background:var(--surface2);font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:9px 20px}
+  tr.sum td{background:var(--accent-soft);font-weight:700;font-size:15.5px}
+  tr.sum td:first-child{color:var(--accent)}
 
-  /* pay split */
   .split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   @media(max-width:620px){.split{grid-template-columns:1fr}}
   .pay{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:20px;box-shadow:var(--shadow)}
@@ -75,15 +76,6 @@
   .pay .v{font-size:24px;font-weight:700;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
   .pay .v small{font-size:13px;font-weight:400;color:var(--muted)}
   .pay p{margin:9px 0 0;font-size:13px;color:var(--muted);line-height:1.5}
-
-  /* later list */
-  .later{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
-  .later .row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--line)}
-  .later .row:last-child{border-bottom:none}
-  .later .row .l h4{margin:0 0 2px;font-size:14.5px}
-  .later .row .l p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.45}
-  .later .row .p{font-family:ui-monospace,Menlo,monospace;font-size:13px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
-  .later .row .p b{color:var(--ink)}
 
   .callout{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 20px;margin-top:24px;font-size:14.5px;color:var(--muted);line-height:1.6}
   .callout b{color:var(--ink)}
@@ -93,65 +85,67 @@
 
 <div class="wrap">
 
-  <p class="eyebrow">Смета · рабочий MVP под ключ</p>
-  <h1>Новостная система — MVP за фикс</h1>
-  <p class="lede">Полностью рабочая система: сбор, база, AI-разметка, склейка дублей, управление в боте и на сайте, AI-редактор. Всё функциональное — в одной цене. Апгрейды и масштаб — потом, отдельно.</p>
+  <p class="eyebrow">Смета · полная стоимость разработки</p>
+  <h1>Новостная AI-платформа — реальная цена</h1>
+  <p class="lede">Полный MVP: сбор с мультиаккаунтами, база, AI-разметка и склейка, Telegram-бот + Mini App, web-платформа, админ-панель, AI-редактор, подписки. Рыночные ставки, без скидок.</p>
 
   <section>
     <div class="hero">
-      <div class="tname">Разработка MVP · всё включено</div>
-      <div class="price">$7 000 <small>± ($6 500–7 500)</small></div>
-      <p class="under">За эти деньги — <b>работающая система целиком</b>, с веб-интерфейсом и AI. Не «часть», не «начало» — законченный MVP, который заменяет текущую систему и сразу приносит пользу. Дальнейшие улучшения — по желанию, когда дозреете.</p>
+      <div class="tname">Разработка полного MVP · под ключ</div>
+      <div class="price">$18 500 <small>($17 000–21 000)</small></div>
+      <p class="under">Это <b>реальная стоимость</b> такой системы при заказной разработке. Подтверждается сметой по модулям ниже — каждая цифра соответствует объёму работ, а не «взята с потолка». Студийная разработка того же — $30 000+.</p>
     </div>
   </section>
 
   <section>
-    <h2><span class="idx">01</span>Что входит в $7 000</h2>
-    <p class="sub">Восемь рабочих кусков. Зелёным — где юзербот и пул 400+ каналов уже дают фору, поэтому всё это влезает в одну цену.</p>
-    <div class="inc">
-      <div class="item"><div class="ic">✓</div><div><h4>Сбор + база <span class="have">есть</span></h4><p>Оба сборщика (ТГ + RSS) пишут всё в PostgreSQL: текст, форматирование, медиа. Ничего не теряется.</p></div></div>
-      <div class="item"><div class="ic">✓</div><div><h4>AI-разметка</h4><p>Тема, язык, реклама, важность на каждый пост. Пре-фильтр до AI, переключатель модели.</p></div></div>
-      <div class="item"><div class="ic">✓</div><div><h4>Склейка дублей</h4><p>Одно событие из 40 каналов → одна карточка «⧉ 40 источников, первым сообщил».</p></div></div>
-      <div class="item"><div class="ic">✓</div><div><h4>Управление — бот + Mini App</h4><p>Маршруты «тема → группа», фильтры, ключевые слова, форматы доставки. Без скриптов.</p></div></div>
-      <div class="item"><div class="ic">✓</div><div><h4>Web-платформа</h4><p>Лента и кабинет на сайте: те же маршруты, темы, фильтры. Один код с Mini App.</p></div></div>
-      <div class="item"><div class="ic">✓</div><div><h4>AI-редактор + студия</h4><p>Отбор, черновик в стиле канала, approve-кнопки. «Редактировать» на новости → правка → публикация.</p></div></div>
-      <div class="item"><div class="ic">✓</div><div><h4>Свои источники <span class="have">пул есть</span></h4><p>Добавить свой канал в ленту — читается без подписки, через тот же конвейер.</p></div></div>
-      <div class="item"><div class="ic">✓</div><div><h4>Пульт оператора</h4><p>Мой дашборд: статус сервисов, расход AI, мёртвые каналы. Держу систему.</p></div></div>
+    <h2><span class="idx">01</span>Смета по модулям</h2>
+    <p class="sub">Каждый модуль — законченный, проверяемый кусок системы.</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Модуль</th><th class="r">Стоимость</th></tr></thead>
+        <tbody>
+          <tr class="zone"><td colspan="2">Сбор и данные</td></tr>
+          <tr><td><div class="mn">Сбор: мультиаккаунт-юзерботы + RSS</div><div class="md">4+1 Telegram-аккаунтов, распределение источников, failover, восстановление пропусков, поллинг публичных каналов без подписки, RSS-парсер.</div></td><td class="r">$3 200</td></tr>
+          <tr><td><div class="mn">База и инфраструктура</div><div class="md">PostgreSQL + схема, очереди, docker-compose, медиа-хранилище (фото/видео/альбомы), миграции, бэкапы.</div></td><td class="r">$1 800</td></tr>
+          <tr><td><div class="mn">Пул источников 1000+</div><div class="md">Курирование каналов по темам, авто-скаут по репостам, распределение по аккаунтам.</div></td><td class="r">$1 200</td></tr>
+
+          <tr class="zone"><td colspan="2">AI-конвейер</td></tr>
+          <tr><td><div class="mn">AI-разметка</div><div class="md">Темы, язык, реклама (включая нативную), важность 1–5. Пре-фильтр правилами, переключатель AI-провайдера, контроль качества.</div></td><td class="r">$2 400</td></tr>
+          <tr><td><div class="mn">Склейка дублей в события</div><div class="md">Embeddings + векторный поиск, «одно событие из 40 каналов», «первым сообщил», ручной merge/unmerge.</div></td><td class="r">$1 600</td></tr>
+
+          <tr class="zone"><td colspan="2">Продукт</td></tr>
+          <tr><td><div class="mn">Telegram-бот + Mini App</div><div class="md">Онбординг, маршруты «тема → чат», фильтры, ключевые слова, форматы (оригинал/карточка/дайджест), доставка с анти-FloodWait.</div></td><td class="r">$2 600</td></tr>
+          <tr><td><div class="mn">Web-платформа (PWA)</div><div class="md">Живая лента (реальное время), кабинет: маршруты, источники, настройки. Светлая + тёмная темы, один код с Mini App.</div></td><td class="r">$2 400</td></tr>
+          <tr><td><div class="mn">Админ-панель</div><div class="md">Пользователи и подписки, аккаунты-сборщики, распределение источников, состояние конвейера, расходы AI, ошибки доставки, журнал действий.</div></td><td class="r">$2 000</td></tr>
+          <tr><td><div class="mn">AI-редактор</div><div class="md">Отбор кандидатов, черновик в стиле издания (2–3 канала), approve-очередь, студия правки текста и медиа, отложенная публикация, история решений.</div></td><td class="r">$2 600</td></tr>
+          <tr><td><div class="mn">Подписки и тарифы</div><div class="md">Тарифы, trial, лимиты, ручное назначение, блокировка по окончании. Основа для платных клиентов.</div></td><td class="r">$1 200</td></tr>
+
+          <tr class="sum"><td>Полный MVP · итого</td><td class="r">$21 000 → $18 500</td></tr>
+        </tbody>
+      </table>
     </div>
+    <div class="callout">Итог по модулям — $21 000. <b>$18 500 — цена одним проектом</b> (пакетная, потому что модули строятся на общем ядре). Это единственная «скидка» в смете.</div>
   </section>
 
   <section>
     <h2><span class="idx">02</span>Оплата</h2>
     <div class="split">
       <div class="pay">
-        <div class="k">Разработка · разово</div>
-        <div class="v">$7 000</div>
-        <p>По этапам: предоплата 30–40% на старте, остальное — по мере сдачи модулей. Каждый кусок сдаётся рабочим.</p>
+        <div class="k">Разработка · этапами</div>
+        <div class="v">$18 500</div>
+        <p>Предоплата 30% при старте ($5 500). Остальное — по сдаче: ядро (сбор+база+AI) → продукт (бот+веб) → редактор+админка. Каждый этап сдаётся работающим.</p>
       </div>
       <div class="pay">
         <div class="k">Поддержка · каждый месяц</div>
-        <div class="v">$500–800 <small>/мес</small></div>
-        <p>Отдельно. Хостинг + AI (~$120) + моя работа: держу систему, слежу за AI и аккаунтами. С первого месяца после запуска.</p>
+        <div class="v">$900–1 200<small> /мес</small></div>
+        <p>Хостинг, AI-API, хранилище (~$150–250 сквозных) + мониторинг 24/7, аккаунты, обновления моделей, правки. Начинается после запуска.</p>
       </div>
     </div>
-  </section>
-
-  <section>
-    <h2><span class="idx">03</span>Апгрейды — потом, по желанию</h2>
-    <p class="sub">Система работает и без этого. Это следующие шаги, когда MVP покажет пользу и захочется расти. Обсудим отдельно.</p>
-    <div class="later">
-      <div class="row"><div class="l"><h4>Расширение пула до 1000+ каналов</h4><p>Скаут новых каналов, добор тем: спорт, финансы, крипта. Второй аккаунт-страховка.</p></div><div class="p">потом</div></div>
-      <div class="row"><div class="l"><h4>Подписка и продажа другим</h4><p>Онбординг клиентов, тарифы, приём оплаты. Превращает систему в продукт на продажу.</p></div><div class="p">потом</div></div>
-      <div class="row"><div class="l"><h4>Углубление AI-редактора</h4><p>Память решений, обучение на вашем вкусе, генерация картинок, перевод.</p></div><div class="p">потом</div></div>
-      <div class="row"><div class="l"><h4>Аналитика и TGStat</h4><p>Рейтинг источников, тренды, «кто первый», статистика доставки.</p></div><div class="p">потом</div></div>
-    </div>
-    <div class="callout">
-      Логика: <b>сначала запускаем рабочее ядро с вебом и AI за $7к, смотрим как оно живёт — потом решаем, какие апгрейды нужны.</b> Не платите вперёд за то, что ещё не факт что понадобится. Улучшения из процесса разработки тоже сюда — обсуждаем по ходу.
-    </div>
+    <div class="callout"><b>Ориентиры рынка:</b> агентство за такой проект возьмёт $30 000–45 000 и 4–6 месяцев. Фрилансер-сеньор — $18 000–25 000 и 3–4 месяца. Подписные SaaS-аналоги (Junction и др.) не продаются как своя система вообще — там вы навсегда арендатор без своих данных.</div>
   </section>
 
   <footer>
-    Смета для обсуждения · $7 000 за рабочий MVP целиком (с вебом и AI). Поддержка — отдельной строкой. Апгрейды — по желанию, позже.
+    Смета в рыночных ставках. Финальная цифра фиксируется до старта; изменения объёма — доп-соглашением по модулям.
   </footer>
 
 </div>
