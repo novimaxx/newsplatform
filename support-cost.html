@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Поддержка и эксплуатация · WIRE</title>
+<style>
+  :root{
+    --bg:#F4F5F7; --surface:#FFFFFF; --surface2:#EDEFF2; --ink:#181C23; --muted:#5C6570;
+    --line:#E1E4E9; --line2:#D2D6DD;
+    --accent:#1E6F8B; --accent-soft:#E1F0F5; --accent-line:#A9D2DF;
+    --good:#2E8F63; --good-soft:#E3F2EA; --good-line:#A9D8BF;
+    --shadow:0 1px 2px rgba(20,24,32,.06),0 8px 28px rgba(20,24,32,.07);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0E1219; --surface:#151B24; --surface2:#1B222D; --ink:#E8ECF2; --muted:#94A0AE;
+      --line:#242C38; --line2:#2E3745;
+      --accent:#5CB8D4; --accent-soft:#122631; --accent-line:#254B58;
+      --good:#4CB98A; --good-soft:#15281F; --good-line:#265B3F;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 32px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#F4F5F7; --surface:#FFFFFF; --surface2:#EDEFF2; --ink:#181C23; --muted:#5C6570;
+    --line:#E1E4E9; --line2:#D2D6DD;
+    --accent:#1E6F8B; --accent-soft:#E1F0F5; --accent-line:#A9D2DF;
+    --good:#2E8F63; --good-soft:#E3F2EA; --good-line:#A9D8BF;
+    --shadow:0 1px 2px rgba(20,24,32,.06),0 8px 28px rgba(20,24,32,.07);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E1219; --surface:#151B24; --surface2:#1B222D; --ink:#E8ECF2; --muted:#94A0AE;
+    --line:#242C38; --line2:#2E3745;
+    --accent:#5CB8D4; --accent-soft:#122631; --accent-line:#254B58;
+    --good:#4CB98A; --good-soft:#15281F; --good-line:#265B3F;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 32px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.6 "Helvetica Neue",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+  .wrap{max-width:860px;margin:0 auto;padding:56px 24px 90px}
+
+  .eyebrow{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+  h1{font-size:clamp(28px,4.4vw,40px);line-height:1.14;margin:0 0 16px;font-weight:700;letter-spacing:-.015em;text-wrap:balance}
+  .lede{max-width:640px;font-size:17.5px;color:var(--muted);margin:0}
+
+  section{margin-top:52px}
+  h2{font-size:22px;letter-spacing:-.01em;margin:0 0 6px}
+  h2 .idx{color:var(--accent);font-family:ui-monospace,Menlo,monospace;font-size:14px;margin-right:9px;font-weight:600}
+  .sub{color:var(--muted);margin:0 0 24px;max-width:620px}
+
+  .hero{border:1px solid var(--accent-line);border-radius:18px;padding:30px;box-shadow:var(--shadow);background:linear-gradient(180deg,var(--accent-soft),var(--surface) 46%)}
+  .hero .tname{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;font-weight:600}
+  .hero .price{font-size:clamp(38px,6.5vw,56px);font-weight:700;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+  .hero .price small{font-size:16px;font-weight:400;color:var(--muted);letter-spacing:0}
+  .hero .plus{font-size:14.5px;color:var(--muted);margin:14px 0 0;line-height:1.55}
+  .hero .plus b{color:var(--ink)}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+  @media(max-width:640px){.split{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+  .card .k{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .card .v{font-size:26px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .card .v small{font-size:14px;font-weight:400;color:var(--muted)}
+  .card p{margin:10px 0 0;font-size:13.5px;color:var(--muted);line-height:1.55}
+
+  ul.inc{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:640px){ul.inc{grid-template-columns:1fr}}
+  ul.inc li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);font-size:13.5px;line-height:1.5}
+  ul.inc li b{display:block;margin-bottom:2px}
+  ul.inc li span{color:var(--muted);font-size:12.5px}
+
+  .tbl{border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden;margin-top:6px}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  th,td{padding:12px 18px;text-align:left;border-bottom:1px solid var(--line)}
+  thead th{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--surface2)}
+  td.r{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  td .mt{color:var(--muted);font-size:12.5px}
+  tr.sum td{background:var(--accent-soft);font-weight:700}
+  tr.sum td:first-child{color:var(--accent)}
+
+  .callout{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 20px;margin-top:24px;font-size:14.5px;color:var(--muted);line-height:1.6}
+  .callout b{color:var(--ink)}
+
+  footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+</style>
+
+<div class="wrap">
+
+  <p class="eyebrow">Поддержка и эксплуатация · ежемесячно</p>
+  <h1>Кто держит систему живой</h1>
+  <p class="lede">Новостная платформа работает 24/7: юзерботы, AI-конвейер, доставка. За тем, чтобы это не падало — постоянный присмотр. Это не «чиним баги по запросу», а активная эксплуатация.</p>
+
+  <section>
+    <div class="hero">
+      <div class="tname">Эксплуатация · моя работа</div>
+      <div class="price">$2 000 <small>/мес</small></div>
+      <p class="plus"><b>+ сквозные расходы отдельно</b> (сервер, AI-API, хранилище) — по факту, ~$200–400/мес. Они идут на систему, не мне, и растут вместе с объёмом — прозрачно.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="idx">01</span>Что входит</h2>
+    <p class="sub">Постоянные задачи, без которых система остановится.</p>
+    <ul class="inc">
+      <li><b>Аккаунты-юзерботы</b><span>Слетают и банятся — восстановление, переподписка, перераспределение источников, обход FloodWait. Срочно, в любое время.</span></li>
+      <li><b>Мониторинг 24/7</b><span>Все сервисы, очереди, доставка. Сломалось — вижу первым по алертам, а не когда встало.</span></li>
+      <li><b>AI-конвейер</b><span>Слежу за качеством разметки, очередями, расходом. Подкручиваю модели и промпты, обновляю провайдеров.</span></li>
+      <li><b>Источники</b><span>Каналы умирают, переезжают, меняют формат. Ловлю молчащие, добавляю новые, чиню RSS.</span></li>
+      <li><b>Доставка</b><span>Ошибки отправки, изменения Telegram API, лимиты — держу маршруты рабочими.</span></li>
+      <li><b>Правки и обновления</b><span>Мелкие доработки по запросу, обновление зависимостей, безопасность.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="idx">02</span>Из чего складывается сумма</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Статья</th><th class="r">В месяц</th></tr></thead>
+        <tbody>
+          <tr><td>Моя работа · эксплуатация <span class="mt">· мониторинг, аккаунты, AI, правки</span></td><td class="r">$2 000</td></tr>
+          <tr><td>Сервер <span class="mt">· под базу и конвейер</span></td><td class="r">$30–60</td></tr>
+          <tr><td>AI-API <span class="mt">· разметка + редактор, растёт с объёмом</span></td><td class="r">$100–250</td></tr>
+          <tr><td>Хранилище медиа <span class="mt">· фото/видео</span></td><td class="r">$20–60</td></tr>
+          <tr class="sum"><td>Итого в месяц</td><td class="r">≈ $2 150–2 370</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">Сквозные расходы (сервер, AI, хранилище) можно оплачивать <b>напрямую</b> с вашего аккаунта — тогда мне идут ровно $2 000 за работу, а расходы на систему полностью прозрачны и под вашим контролем.</div>
+  </section>
+
+  <section>
+    <h2><span class="idx">03</span>Почему это стоит своих денег</h2>
+    <div class="split">
+      <div class="card">
+        <div class="k">Без поддержки</div>
+        <div class="v">Система встанет</div>
+        <p>Слетел аккаунт — сбор остановился. Выросла очередь AI — лента замерла. Никто не смотрит — узнаёте, когда клиенты уже ушли.</p>
+      </div>
+      <div class="card">
+        <div class="k">Рыночный ориентир</div>
+        <div class="v">$2 000–5 000<small> /мес</small></div>
+        <p>Managed-сервис или fractional DevOps с дежурством за такую систему. $2 000 — нижняя граница за активную эксплуатацию.</p>
+      </div>
+    </div>
+    <div class="callout"><b>Разработку платят один раз — поддержку каждый месяц.</b> Это то, что держит систему живой и растёт вместе с вашим бизнесом: больше каналов и клиентов → больше нагрузка, но и больше выручка.</div>
+  </section>
+
+  <footer>
+    Условия: оплата помесячно, вперёд. Входит до N правок в месяц + мониторинг 24/7 + обновления; крупные новые фичи — отдельно по смете разработки.
+  </footer>
+
+</div>
+
+</html>
